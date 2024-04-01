@@ -1,0 +1,79 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.video-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -1; /* Ensures the video stays behind other elements */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#welcome {
+    animation: fadeIn 3s ease-in; /* Apply the animation */
+    font-family: 'EB Garamond', serif;
+    color: white;                  /* Set text color to white */
+    text-align: center;            /* Center the text horizontally */
+    position: absolute;            /* Position it absolutely */
+    top: 20%;                      /* Center vertically */
+    left: 50%;                     /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust the position */
+    z-index: 2;                    /* Ensure it's above the video background */
+}
+
+#comingsoon {
+    opacity: 0;
+    animation: fadeIn 3s ease-in; /* Apply the animation */
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    font-family: 'EB Garamond', serif;
+    color: white;                  /* Set text color to white */
+    text-align: center;            /* Center the text horizontally */
+    position: absolute;            /* Position it absolutely */
+    top: 25%;                      /* Center vertically */
+    left: 50%;                     /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust the position */
+    z-index: 2;                    /* Ensure it's above the video background */
+}
+
+#fullVideo {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Ensures the video covers the entire container */
+
+}#loopVideo {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Ensures the video covers the entire container */
+}
+
+
+.content {
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5); /* Add a black background with some opacity */
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+}
