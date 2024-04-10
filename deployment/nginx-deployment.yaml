@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:latest # Nginx Docker image
+        image: stellarchaos/stellarnet:latest # Nginx Docker image
         ports:
         - containerPort: 80
 
