@@ -1,0 +1,15 @@
+# ingressroute-StellarNet.yaml
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stellarnet
+  namespace: default  # Ensure this matches the namespace where your service and deployment are located
+spec:
+  entryPoints:
+    - web  # This should be configured in your Traefik to handle HTTP traffic, change to 'websecure' for HTTPS in the future
+  routes:
+  - match: Host(`lukasraabesmart.com`) && PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: stellarnet-service
+      port: 80

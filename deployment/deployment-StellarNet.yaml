@@ -1,0 +1,23 @@
+# nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stellarnet
+  namespace: default  # Ensure this matches the namespace where your service and ingress are deployed
+labels:
+    app: stellarnet
+spec:
+  replicas: 2  # Ensuring high availability
+  selector:
+    matchLabels:
+      app: stellarnet
+  template:
+    metadata:
+      labels:
+        app: stellarnet
+    spec:
+      containers:
+      - name: stellarnet
+        image: stellarchaos/stellarnet:latest
+        ports:
+        - containerPort: 80
