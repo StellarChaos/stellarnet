@@ -5,16 +5,19 @@ metadata:
   name: stellarnet
   namespace: stellarnet-namespace  # Ensure this matches the namespace where your service and ingress are deployed
   labels:
-    app: stellarnet
+    app.kubernetes.io/component: webserver
+    app.kubernetes.io/part-of: stellarnet
 spec:
   replicas: 2  # Ensuring high availability
   selector:
     matchLabels:
-      app: stellarnet
+      app.kubernetes.io/component: webserver
+      app.kubernetes.io/part-of: stellarnet
   template:
     metadata:
       labels:
-        app: stellarnet
+        app.kubernetes.io/component: webserver
+        app.kubernetes.io/part-of: stellarnet
     spec:
       containers:
       - name: stellarnet
