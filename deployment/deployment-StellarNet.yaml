@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: stellarnet
-  namespace: default  # Ensure this matches the namespace where your service and ingress are deployed
+  namespace: stellarnet-namespace  # Ensure this matches the namespace where your service and ingress are deployed
 labels:
     app: stellarnet
 spec:
