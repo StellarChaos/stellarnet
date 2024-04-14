@@ -11,5 +11,5 @@ spec:
   - match: Host(`lukasraabesmart.com`) && PathPrefix(`/`)
     kind: Rule
     services:
-    - name: stellarnet
+    - name: stellarnet-service
       port: 80
