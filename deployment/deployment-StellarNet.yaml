@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: stellarnet
   namespace: stellarnet-namespace  # Ensure this matches the namespace where your service and ingress are deployed
-labels:
+  labels:
     app: stellarnet
 spec:
   replicas: 2  # Ensuring high availability
