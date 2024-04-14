@@ -2,7 +2,7 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: stellarnet
+  name: stellarnet-ingressroute
   namespace: stellarnet-namespace # Ensure this matches the namespace where your service and deployment are located
 spec:
   entryPoints:
@@ -11,5 +11,7 @@ spec:
   - match: Host(`lukasraabesmart.com`) && PathPrefix(`/`)
     kind: Rule
     services:
-    - name: stellarnet-service
+    - kind: Service
+      name: stellarnet-service
+      namespace: stellarnet-namespace
       port: 80
