@@ -3,7 +3,7 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: stellarnet
-  namespace: default  # Ensure this matches the namespace where your service and deployment are located
+  namespace: traefikproxy-namespace # Ensure this matches the namespace where your service and deployment are located
 spec:
   entryPoints:
     - web  # This should be configured in your Traefik to handle HTTP traffic, change to 'websecure' for HTTPS in the future
