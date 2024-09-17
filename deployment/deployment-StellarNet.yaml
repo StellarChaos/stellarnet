@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: stellarnet
-  namespace: stellarnet-namespace  # Ensure this matches the namespace where your service and ingress are deployed
+  namespace: stellarnet-namespace
   labels:
     app.kubernetes.io/component: webserver
     app.kubernetes.io/part-of: stellarnet
 spec:
-  replicas: 2  # Ensuring high availability
+  replicas: 2
   selector:
     matchLabels:
       app.kubernetes.io/component: webserver
@@ -28,4 +28,14 @@ spec:
         - containerPort: 443
           name: websecure
           protocol: TCP
-          
+        volumeMounts:
+        - name: nginx-config-volume
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      - name: nginx-config-volume
+        configMap:
+          name: nginx-config
+          items:
+          - key: nginx.conf
+            path: nginx.conf
