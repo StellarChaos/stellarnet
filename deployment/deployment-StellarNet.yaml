@@ -21,6 +21,7 @@ spec:
       containers:
       - name: stellarnet
         image: docker.io/stellarchaos/stellarnet:v1.1
+        imagePullPolicy: Always  
         ports:
         - containerPort: 80
           name: web
