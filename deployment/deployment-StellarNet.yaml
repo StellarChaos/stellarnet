@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: stellarnet
-        image: stellarchaos/stellarnet:v1.1
+        image: docker.io/stellarchaos/stellarnet:v1.1
         ports:
         - containerPort: 80
           name: web
