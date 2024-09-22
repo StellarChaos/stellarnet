@@ -62,7 +62,7 @@
     });
 
     // Render Webamp in the div container
-    webamp.renderWhenReady(document.getElementById('winamp-container'));
+    webamp.renderWhenReady(document.getElementById('winamp-container')).then(() => {
 
 
     // Function to fetch Icecast metadata
@@ -74,22 +74,23 @@
                 // Assuming the JSON structure from Icecast contains song metadata
                 const songInfo = data.icestats.source.title; // Adapt this to your Icecast JSON format
 
-                // Get the current track in Webamp and update the title
-                const currentTrack = webamp.getMediaPlayer().getTrack(0); // Assuming the first track is the stream
-                currentTrack.setMetaData({
-                    title: songInfo // Update the track title with the current song info
-                });
+                // Update the title of the first track in the playlist
+                webamp.setTracks([{
+                    url: liveStreamUrl,
+                    defaultName: songInfo // Set the song title from the metadata
+                }], 0); // The second argument is the index of the track in the playlist (0 for the first track)
 
             } catch (error) {
                 console.error('Error fetching metadata:', error);
             }
         }
 
-        // Poll for new metadata every 5 seconds
-        setInterval(fetchMetadata, 5000);
+        // Poll for new metadata every 10 seconds
+        setInterval(fetchMetadata, 10000);
 
         // Fetch metadata immediately on page load
         fetchMetadata();
+    });
 
 </script>
 </body>
