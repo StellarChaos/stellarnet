@@ -64,33 +64,33 @@
 
     // Render Webamp in the div container
     webamp.renderWhenReady(document.getElementById('winamp-container')).then(() => {
+        
+        // Function to fetch Icecast metadata
+        async function fetchMetadata() {
+            try {
+                const response = await fetch('/stream-metadata'); // Your proxy endpoint for metadata
+                const data = await response.json();
 
-// Function to fetch Icecast metadata
-async function fetchMetadata() {
-    try {
-        const response = await fetch('/stream-metadata'); // Your proxy endpoint for metadata
-        const data = await response.json();
+                // Assuming the JSON structure from Icecast contains song metadata
+                const songInfo = data.icestats.source.title; // Adapt this to your Icecast JSON format
 
-        // Assuming the JSON structure from Icecast contains song metadata
-        const songInfo = data.icestats.source.title; // Adapt this to your Icecast JSON format
+                // Use setTracksToPlay to update the title of the currently playing track
+                webamp.setTracksToPlay([{
+                    url: liveStreamUrl,
+                    defaultName: songInfo // Set the song title from the metadata
+                }]);
 
-        // Get the first track in Webamp's playlist and replace its metadata
-        webamp.replaceTrack({
-            url: liveStreamUrl,
-            defaultName: songInfo // Update the track title from the metadata
-        }, 0); // Replace the track at index 0 (the first track)
+            } catch (error) {
+                console.error('Error fetching metadata:', error);
+            }
+        }
 
-    } catch (error) {
-        console.error('Error fetching metadata:', error);
-    }
-}
+        // Poll for new metadata every 10 seconds
+        setInterval(fetchMetadata, 10000);
 
-// Poll for new metadata every 10 seconds
-setInterval(fetchMetadata, 10000);
-
-// Fetch metadata immediately on page load
-fetchMetadata();
-});
+        // Fetch metadata immediately on page load
+        fetchMetadata();
+    });
 
 </script>
 </body>
