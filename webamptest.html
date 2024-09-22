@@ -23,18 +23,73 @@
             }
         ],
         initialSkin: {
-            url: "https://cdn.webamp.org/skins/classic.wsz"
+            url: "skins/Sony_MPW-35_silver.wsz"
         },
         availableSkins: [
             {
-                url: "https://cdn.webamp.org/skins/classic.wsz",
-                name: "Winamp Classic"
+                url: "skins/DJ_LAIN_Serial_ExP_2.wsz",
+                name: "DJ LAIN"
+            },
+            {
+                url: "skins/Half-Life_ESP.wsz",
+                name: "Half-Life"
+            },
+            {
+                url: "skins/Sony_MPW-35_silver.wsz",
+                name: "Sony_MPW-35"
+            },
+            {
+                url: "skins/nekojiru_udon.wsz",
+                name: "Nekojiru Udon"
+            },
+            {
+                url: "skins/m-lo_black.wsz",
+                name: "M-LO Black"
+            },
+            {
+                url: "skins/Mario-Anniversary.wsz",
+                name: "Mario Anniversary"
+            },
+            {
+                url: "skins/Stuart_Little_amp_1.2.wsz",
+                name: "Stuart Little"
+            },
+            {
+                url: "skins/XP_bleu_skin.wsz",
+                name: "Windows XP"
             }
         ]
     });
 
     // Render Webamp in the div container
     webamp.renderWhenReady(document.getElementById('winamp-container'));
+
+
+    // Function to fetch Icecast metadata
+    async function fetchMetadata() {
+            try {
+                const response = await fetch('/stream-metadata'); // Your proxy endpoint for metadata
+                const data = await response.json();
+
+                // Assuming the JSON structure from Icecast contains song metadata
+                const songInfo = data.icestats.source.title; // Adapt this to your Icecast JSON format
+
+                // Get the current track in Webamp and update the title
+                const currentTrack = webamp.getMediaPlayer().getTrack(0); // Assuming the first track is the stream
+                currentTrack.setMetaData({
+                    title: songInfo // Update the track title with the current song info
+                });
+
+            } catch (error) {
+                console.error('Error fetching metadata:', error);
+            }
+        }
+
+        // Poll for new metadata every 5 seconds
+        setInterval(fetchMetadata, 5000);
+
+        // Fetch metadata immediately on page load
+        fetchMetadata();
 
 </script>
 </body>
