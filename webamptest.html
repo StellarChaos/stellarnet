@@ -68,7 +68,7 @@
         // Function to fetch Icecast metadata
         async function fetchMetadata() {
             try {
-                const response = await fetch('/stream-metadata'); // Your proxy endpoint for metadata
+                const response = await fetch('/stream-metadata.xsl'); // Your proxy endpoint for metadata
                 const data = await response.json();
 
                 // Assuming the JSON structure from Icecast contains song metadata
