@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webamp with Live Stream</title>
+    <script src="https://unpkg.com/webamp"></script>
+</head>
+<body>
+
+<div id="winamp-container"></div>
+
+<script>
+    // Replace this with your live audio stream URL
+    const liveStreamUrl = '/stream';
+
+    // Initialize Webamp
+    const webamp = new Webamp({
+        initialTracks: [
+            {
+                url: liveStreamUrl,
+                defaultName: "Live Stream"
+            }
+        ],
+        initialSkin: {
+            url: "https://cdn.webamp.org/skins/classic.wsz"
+        },
+        availableSkins: [
+            {
+                url: "https://cdn.webamp.org/skins/classic.wsz",
+                name: "Winamp Classic"
+            }
+        ]
+    });
+
+    // Render Webamp in the div container
+    webamp.renderWhenReady(document.getElementById('winamp-container'));
+
+</script>
+</body>
+</html>
