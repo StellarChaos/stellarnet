@@ -23,7 +23,7 @@
             }
         ],
         initialSkin: {
-            url: "skins/Sony_MPW-35_silver.wsz"
+            url: "skins/Half-Life_ESP.wsz"
         },
         availableSkins: [
             {
@@ -64,6 +64,8 @@
 
     // Render Webamp in the div container
     webamp.renderWhenReady(document.getElementById('winamp-container')).then(() => {
+
+        webamp.getMediaPlayer().setDoubleSizeMode(true);
         
         // Function to fetch Icecast metadata
         async function fetchMetadata() {
