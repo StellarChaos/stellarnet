@@ -6,12 +6,18 @@ metadata:
   namespace: stellarnet-namespace # Ensure this matches the namespace where your service and deployment are located
 spec:
   entryPoints:
-    - web  # This should be configured in your Traefik to handle HTTP traffic, change to 'websecure' for HTTPS in the future
+    - websecure  # This should be configured in your Traefik to handle HTTP traffic, change to 'websecure' for HTTPS in the future
   routes:
-  - match: Host(`lukasraabesmart.com`) && PathPrefix(`/`)
-    kind: Rule
+  - kind: Rule
+    match: Host(`lukasraabesmart.com`) && PathPrefix(`/`)
     services:
     - kind: Service
       name: stellarnet-service
       namespace: stellarnet-namespace
       port: 80
+  tls:
+    certResolver: "letsencrypt"
+    domains:
+      - main: "lukasraabesmart.com"
+        sans:
+          - "*.lukasraabesmart.com"
